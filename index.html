@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poller+One' rel='stylesheet' type='text/css'>
+    <script src="/assets/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Robot Dance</title>
+    <style>
+        /* Animation */
+        @keyframes blink {
+            50% {
+                background: radial-gradient(circle, #f346b9 10%, transparent 30%), #302B9D;
+                background-size: 100px 150px;
+            }
+        }
+
+        @-webkit-keyframes blink {
+            50% {
+                background: -webkit-radial-gradient(circle, #f346b9 10%, transparent 30%), #302B9D;
+                background-size: 100px 150px;
+            }
+        }
+
+        @-moz-keyframes blink {
+            50% {
+                background: -moz-radial-gradient(circle, #f346b9 10%, transparent 30%), #cc5;
+                background-size: 100px 150px;
+            }
+        }
+
+        @-webkit-keyframes dance {
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: 65%;
+            }
+
+            100% {
+                left: 0;
+            }
+
+        }
+
+        @-moz-keyframes dance {
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: 65%;
+            }
+
+            100% {
+                left: 0;
+            }
+
+        }
+
+        @keyframes dance {
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: 65%;
+            }
+
+            100% {
+                left: 0;
+            }
+
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(27 29 140, 0.5);
+            transition: background-color 0.2s ease-in;
+        }
+
+        button {
+            height: 50px;
+            width: 200px;
+            background: #c1e8b5;
+            border: 0;
+            border-radius: 2px;
+            color: #181991;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+
+
+        }
+
+        button:hover {
+            opacity: 0.8;
+            background: #ee3ca9;
+            color: white;
+            -webkit-transition: background-color 1000ms linear;
+            -ms-transition: background-color 1000ms linear;
+            transition: background-color 1000ms linear;
+
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-evenly;
+
+        }
+
+        .robot {
+            display: none;
+            position: relative;
+            left: 0;
+            width: 500px;
+            padding-top: 50px;
+            animation: dance 4s infinite;
+            -webkit-animation: dance 4s infinite;
+            -moz-animation: dance 4s infinite;
+        }
+
+        .show {
+            display: block;
+        }
+
+
+        .laser {
+            animation: blink .5s infinite;
+            -webkit-animation: blink .5s infinite;
+            -moz-animation: blink .5s infinite;
+        }
+
+        .brain {
+            background: radial-gradient(circle, #99e8b4 10%, transparent 30%), #302B9D;
+            background: -moz-radial-gradient(circle, #99e8b4 10%, transparent 30%), #302B9D;
+            background: -webkit-radial-gradient(circle, #99e8b4 10%, transparent 30%), #302B9D;
+            background-size: 50% 100%;
+            height: 200px;
+            width: 86%;
+            border-radius: 80px 80px 0px 0px;
+            border-bottom: 40px solid #c7c7e4;
+            border-top: 20px solid #c7c7e4;
+            border-left: 30px solid #c7c7e4;
+            border-right: 30px solid #c7c7e4;
+            border-bottom: 80px solid #c7c7e4;
+            position: relative;
+            left: 20%;
+        }
+
+        .torso {
+            height: 0;
+            width: 68%;
+            border-top: 300px solid #c7c7e4;
+            border-left: 75px solid transparent;
+            border-right: 75px solid transparent;
+            border-radius: 0px 0px 100px 100px;
+            position: relative;
+            left: 20%;
+        }
+
+        .left {
+            font-family: 'Poller One', verdana, arial, sans-serif;
+            font-weight: bold;
+            font-size: 250px;
+            color: #c7c7e4;
+            transform: rotate(200deg);
+            -webkit-transform: rotate(200deg);
+            -moz-transform: rotate(200deg);
+            position: relative;
+            top: -389px;
+            left: -392px;
+            z-index: -1;
+        }
+
+        .right {
+            font-family: 'Poller One', verdana, arial, sans-serif;
+            font-weight: bold;
+            font-size: 250px;
+            color: #c7c7e4;
+            transform: scaleY(-1) rotate(20deg);
+            -webkit-transform: scaleY(-1) rotate(20deg);
+            -moz-transform: scaleY(-1) rotate(45deg);
+            position: relative;
+            top: -694px;
+            left: 400px;
+            /*z-index: -1;*/
+        }
+
+        .foot {
+            height: 100px;
+            width: 100px;
+            background: #b1b0d3;
+            border-radius: 70px;
+            border: 15px solid #7d76b4;
+            position: relative;
+            left: 276px;
+            top: -48px;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls">
+        <button class="moves">1.Dance</button>
+        <button class="flash">2. Crazy Eyes </button>
+        <button class="color">3. Disco</button>
+
+    </div>
+    <div class="robot">
+        <div class="brain"></div>
+        <div class="torso">
+            <div class="left">j</div>
+            <div class="right">j</div>
+        </div>
+        <div class="foot"></div>
+    </div>
+
+    <script>
+        // When eyes button is clicked, toggle laser class on brain
+        $(".flash").click(function () {
+            $(".brain").toggleClass('laser');
+        });
+
+        // When color button is clicked...
+        $(".color").click(function () {
+            
+            setInterval(function () {
+                // assign each named color a random number 0-255
+            var red = Math.floor(Math.random() * 255);
+            var green = Math.floor(Math.random() * 255);
+            var blue = Math.floor(Math.random() * 255);
+            //Store the value of red green blue on a variable generatinr rbga() value
+            var randomRGBA = 'rgba(' + red + ',' + green + ', ' + blue + ',0.4)';
+            //Change the body's color with value of randomRBGA
+                //this code runs every second 
+                $("body").css("background", randomRGBA);
+            }, 1000);
+
+            //Display the three values in an alert window
+            //alert(randomRGBA);
+        });
+
+        $(".moves").click(function () {
+            $(".robot").toggle("show");
+        });
+    </script>
+
+</body>
